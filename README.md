@@ -1,4 +1,4 @@
-# Template of project strucute contained experiments 
+# Template of project code
 This is a template of project code leveraged from Stanford cs230 course and updated for my specific purposes.
 
 TODO:
