@@ -28,3 +28,8 @@ Data/
     test/
       ...
 ```
+Note: The scructure of the data could be different in that case you will need to update fetch_dataloader function in data_loader.py.
+
+## Quickstart
+
+### 1. Run single experiment.
