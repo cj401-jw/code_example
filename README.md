@@ -25,7 +25,7 @@ This is a template of project code leveraged from [Stanford cs230 Deep Learning]
 ```
 
 ## Dataset
-Dataset storied in Data folder. In case if use have several datasets then you should have folder for each dataset with following folders: train, valid, test (optional). Here is a structure of the data:
+Dataset storied in `data/` folder. In case if use have several datasets then you should have folder for each dataset with following folders: train, valid, test (optional). Here is a structure of the data:
 ```
 Data/
   Imagenet/
