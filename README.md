@@ -30,6 +30,10 @@ Data/
 ```
 Note: The scructure of the data could be different in that case you will need to update fetch_dataloader function in data_loader.py.
 
+## Experiments parameters
+To compare experiment results with need to log all parameters which was used while training. We do this through `params.json` file
+
 ## Quickstart
 
-### 1. Run single experiment.
+1. __Create a folder for experiment and parameters__: Create a folder with experiment name under `experiments` folder with `params.json`. Put template structure for json file. 
+2. __Run experiment__: To run the experiment just 
