@@ -127,13 +127,13 @@ The structure of completed params searching might look like this:
 ```
 ├── experiments             
 │   └── resnet18     
-│       ├── learning_rate
-│           └── params.json               <- params used to init model, each folder has own json with approp search values
+│       └── learning_rate
+│           ├── params.json               <- params used to init model, each folder has own json with approp search values
 │           ├── history_plots.png         <- summary plot with all experiments  
 │           ├── results.md                <- table of metrics for all values 
 │           ├── learning_rate_0.001       <- folder and folder beneath has the same structure as after run train.py
 │           ├── learning_rate_0.0001      
-│           ├── learning_rate_0.00001     
+│           └── learning_rate_0.00001     
 ```
 __Important notes__: 
 1. You can run for example several different architectures not just params. 
