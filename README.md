@@ -30,8 +30,45 @@ Data/
 ```
 Note: The scructure of the data could be different in that case you will need to update fetch_dataloader function in data_loader.py.
 
-## Experiments parameters
-To compare experiment results with need to log all parameters which was used while training. We do this through `params.json` file
+## Experiment parameters
+To compare experiment results we need to log all parameters which was used while training. We do this through `params.json` file. Each experiment has it's won folder `params.json` under it. Here is detailed description of this file:
+``json
+{
+    "arch": "resnet18",
+    "pretrain": 1,
+    "n_clas": 9,
+    "im_sz": 224,
+    "batch_size": 128,
+    "bs_test": 16,
+    "learning_rate": [     # learning rate for each layer groups
+        0.002,
+        0.002,
+        0.002
+    ],
+    "wd": 0.0001,
+    "ps": 0.5,             # dropout for head classifier layer
+    "num_epochs": 10,
+    "num_workers": 4,
+    "cuda": 1,
+    "scheduler": "one_cycle",
+    "div_factor": 25,
+    "pct_start": 0.3,
+    "save_summary_steps": 1,
+    "early_stopping": {
+        "patience": 10,
+        "monitor_metric": "loss",
+        "min_delta": 0.01,
+        "minimize": 1
+    },
+    "hyper_search": {     # we use it when run search_hyperparams.py
+        "ps": [
+            0.5,
+            0.75
+        ]
+    }
+}
+```
+
 
 ## Quickstart
 
