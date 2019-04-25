@@ -91,8 +91,18 @@ Create a folder with experiment name under `experiments` folder with `params.jso
 python train.py --data_dir data/imagenet/ --model_dir experiments/resnet18/
 ```
 It will instantiate a model and train it on the training set following the hyperparameters specified in `params.json`. It will also evaluate metrics (defined in `model/metirc.py`) on the validation set. While training you can monitor training through real time ploting which automaticly will arise after start training. </br> 
-The structure of experiments after running a few different models might look like this (try to give meaningful names to the directories depending on what experiment you are running):
-
+The structure of completed experiment might look like this (try to give meaningful names to the directories depending on what experiment you are running):
+```
+├── experiments             
+│   └── resnet18     
+│       ├── metrics_val_last_weights.json        <- weights saved from the 5 last epochs
+│       ├── metrics_val_best_weights.json        <- best weights (based on valid accuracy)
+│       ├── params.json             <- the list of hyperparameters, in json format
+│       ├── history.json            <- history of training 
+│       ├── augm.pkl                <- used augmentation
+│       ├── train.log               <- he training log (everything we print to the console)
+│       ├── train_history.png       <- train summaries in figure
+```
 
 
 2. __Hyper parameters search__
@@ -109,15 +119,27 @@ This script will run `train.py` several times with different hyperparams. Pay at
     }
 }
 ```
-After you definied json file just run:
+Also folder for experiment should be created. Folder name should be equal to searning parameter for example `experiments/resnet18/learning_rate/` , put defined above json file in this folder and run:
 ```
 python search_hyperparams.py --data_dir data/imagenet/ --parent_dir experiments/resnet18/learning_rate/
 ```
-It will train and evaluate a model with different values of learning rate defined in `search_hyperparams.py` and create a new directory for each experiment under `experiments/learning_rate/`.
-__Important__: 
+It will train and evaluate a model with different values of learning rate defined in `search_hyperparams.py` and create a new directory for each experiment under `experiments/learning_rate/`. </br>
+The structure of completed params searching might look like this:
+```
+├── experiments             
+│   └── resnet18     
+│       ├── learning_rate
+│           └── params.json               <- params used to init model, each folder has own json with approp search values
+│           ├── history_plots.png         <- summary plot with all experiments  
+│           ├── results.md                <- table of metrics for all values 
+│           ├── learning_rate_0.001       <- folder and folder beneath has the same structure as after run train.py
+│           ├── learning_rate_0.0001      
+│           ├── learning_rate_0.00001     
+```
+__Important notes__: 
 1. You can run for example several different architectures not just params. 
-2. Pay attention we can do search only for those params which we have in this json file. 
-3. Also we can do search for single variable, we can not do it for several variables at once. This is in todo list.
+2. Pay attention we can do search only for those params which we have in this `params.json` file. 
+3. One run one variable to search. To run search for several variable is in todo list.
 
 
 ### __Display the results__ of the hyperparameters search in a nice format
