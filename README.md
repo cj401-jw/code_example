@@ -85,7 +85,7 @@ This json file we loading in `train.py` script and propogate throught all method
 
 ## __Running experiments__
 
-1. __Train single model__</br>
+### __Train single model__</br>
 Create a folder with experiment name under `experiments` folder with `params.json`. It should looks like `experiments/resnet18/params.json`. Then just run the experiment:
 ```
 python train.py --data_dir data/imagenet/ --model_dir experiments/resnet18/
@@ -104,8 +104,7 @@ The structure of completed experiment might look like this (try to give meaningf
 │       ├── train_history.png       <- train summaries in figure
 ```
 
-
-2. __Hyper parameters search__
+### __Hyper parameters search__
 This script will run `train.py` several times with different hyperparams. Pay attention that hyperparams to search should be defined in `params.json` like in the following example: 
 ```json
 {
@@ -143,6 +142,7 @@ __Important notes__:
 
 
 ### __Display the results__ of the hyperparameters search in a nice format
+This script runs automaticaly within searching hyperparasm but also could be runned separately.
 ```
 python synthesize_results.py --parent_dir experiments/learning_rate
 ```
