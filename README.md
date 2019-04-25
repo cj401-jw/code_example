@@ -1,4 +1,4 @@
-# Template of project code
+# Structure of the code
 This is a template of project code leveraged from [Stanford cs230 Deep Learning](https://cs230-stanford.github.io/project-code-examples.html) course and updated for my specific purposes.
 
 ```
@@ -18,7 +18,7 @@ This is a template of project code leveraged from [Stanford cs230 Deep Learning]
 ├── include.py              <- script contains settings, imported modules, imagenet stats for norm and so on 
 ├── synthesize_results.py   <- plot results in tabular for several trained models or after hyperparams search
 ├── plot_results.py         <- plot results in graphical way for several trained models or after hyperparams search
-├── search_hyperparams.py   
+├── search_hyperparams.py   <- run train.py multiple times with different hyperparameters
 ├── evaluate.py             <- run model to evaulate on test set   
 ├── train.py                <- main script which runs all magic, loss_func and optimizer defined here
 └── utils.py                <- supporter funcs
@@ -83,27 +83,42 @@ To compare experiment results we need to log all parameters which was used while
 ```
 This json file we loading in `train.py` script and propogate throught all methods which require these params. If you need to clarify where these parameters go from this json you should directly go to `train.py`.
 
-## __Train single model__
-1. Create a folder with experiment name under `experiments` folder with `params.json`. 
-2. To run the experiment just 
+## __Running experiments__
+
+1. __Train single model__</br>
+Create a folder with experiment name under `experiments` folder with `params.json` and run the experiment:
 ```
 python train.py --data_dir data/imagenet/ --model_dir experiments/resnet18/
 ```
 It will instantiate a model and train it on the training set following the hyperparameters specified in `params.json`. It will also evaluate some metrics on the validation set. While training you can monitor training through real time ploting which automaticly will arise after start training. After finish training you experiment folder should be:
 
 
-## __Hyper parameters search__
-To run hyper params search run: 
+2. __Hyper parameters search__
+This script will run `train.py` several times with different hyperparams. Pay attention that hyperparams to search should be defined in `params.json` like in the following example: 
+```json
+{
+    "arch": "resnet18",
+    ...
+    "hyper_search": {     
+        "learning_rate": [
+            1e-4,
+            1e-3,
+        ]
+    }
+}
+```
+After you definied json file just run:
 ```
 python search_hyperparams.py --data_dir data/imagenet/ --parent_dir experiments/resnet18/learning_rate/
 ```
 It will train and evaluate a model with different values of learning rate defined in `search_hyperparams.py` and create a new directory for each experiment under `experiments/learning_rate/`.
+__Important__: 
+1. You can run for example several different architectures not just params. 
+2. Pay attention we can do search only for those params which we have in this json file. 
+3. Also we can do search for single variable, we can not do it for several variables at once. This is in todo list.
 
-## __Compare different architectures__
-Case when we comparing different architectures or model parameters.
 
-
-## __Display the results__ of the hyperparameters search in a nice format
+### __Display the results__ of the hyperparameters search in a nice format
 ```
 python synthesize_results.py --parent_dir experiments/learning_rate
 ```
@@ -112,13 +127,13 @@ It will create search params results in tabular format and if you want to see re
 python plot_results.py --parent_dir experiments/learning_rate
 ```
 
-## __Evaluation on the test set__ 
+### __Evaluation on the test set__ 
 Once you've run many experiments and selected your best model and hyperparameters based on the performance on the validation set, you can finally evaluate the performance of your model on the test set. Run
 ```
 python evaluate.py --data_dir data/64x64_SIGNS --model_dir experiments/base_model
 ```
 
-TODO:
+__TODO__:
 - describe how to use this code
 - update Early Stopping
 - compare performance with fast.ai library
