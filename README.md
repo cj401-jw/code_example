@@ -9,6 +9,9 @@ TODO:
 - add monitoring of activations/gradients
 - add monitoring of weights/updates magnitude (histogram of all layers)
 
+## Folder structure with description.
+TODO
+
 This project template could be applied for any computer vision task with tiny changes.
 
 ## Dataset
@@ -71,11 +74,11 @@ To compare experiment results we need to log all parameters which was used while
 This json file we loading in `train.py` script and propogate throught all methods which require these params. If you need to clarify where these parameters go from this json you should directly go to `train.py`.
 
 ## Logistics
-__metrics__: All metrics should be defined in `model/metric.py`
-__loss function__: defined in `train.py`. If it custom than could be defined in `net.py`
-__augmentation__: defined in `model/data_loader.py`. 
-__optimizer__: defined in `model/train.py`. 
-__architecture__: model, layers to build a model and all related to model magic are in `model/net.py`. 
+1. __metrics__: All metrics should be defined in `model/metric.py`
+2. __loss function__: defined in `train.py`. If it custom than could be defined in `net.py`
+3. __augmentation__: defined in `model/data_loader.py`. 
+4. __optimizer__: defined in `model/train.py`. 
+5. __architecture__: model, layers to build a model and all related to model magic are in `model/net.py`. 
 
 
 ## Quickstart
@@ -86,6 +89,13 @@ __Train single model.__
 ```
 python train.py --data_dir data/imagenet/ --model_dir experiments/resnet18/
 ```
-It will instantiate a model and train it on the training set following the hyperparameters specified in `params.json`. It will also evaluate some metrics on the validation set. While training you can monitor training through real time ploting which automaticly will arise after start training. Figure with training process will be saved in the experiment folder after training finished.
+It will instantiate a model and train it on the training set following the hyperparameters specified in `params.json`. It will also evaluate some metrics on the validation set. While training you can monitor training through real time ploting which automaticly will arise after start training. __TODO__ put description of all files within experiment folder after finish training.
 
 __Hyper parameters search.__
+To run hyper params search run: 
+```
+python search_hyperparams.py --data_dir data/imagenet/ --parent_dir experiments/resnet18/learning_rate/
+```
+It will train and evaluate a model with different values of learning rate defined in `search_hyperparams.py` and create a new directory for each experiment under `experiments/learning_rate/`.
+
+
