@@ -41,7 +41,7 @@ Data/
     test/
       ...
 ```
-Note: The scructure of the data could be different in that case you will need to update fetch_dataloader function in data_loader.py.
+Note: The scructure of the data could be different in that case you will need to update `fetch_dataloader()` function in `data_loader.py`.
 
 ## Experiment parameters
 To compare experiment results we need to log all parameters which was used while training. We do this through `params.json` file. Each experiment has it's own folder and `params.json` under it. Here is detailed description of this file:
