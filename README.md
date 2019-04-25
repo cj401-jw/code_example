@@ -86,11 +86,13 @@ This json file we loading in `train.py` script and propogate throught all method
 ## __Running experiments__
 
 1. __Train single model__</br>
-Create a folder with experiment name under `experiments` folder with `params.json` and run the experiment:
+Create a folder with experiment name under `experiments` folder with `params.json`. It should looks like `experiments/resnet18/params.json`. Then just run the experiment:
 ```
 python train.py --data_dir data/imagenet/ --model_dir experiments/resnet18/
 ```
-It will instantiate a model and train it on the training set following the hyperparameters specified in `params.json`. It will also evaluate some metrics on the validation set. While training you can monitor training through real time ploting which automaticly will arise after start training. After finish training you experiment folder should be:
+It will instantiate a model and train it on the training set following the hyperparameters specified in `params.json`. It will also evaluate metrics (defined in `model/metirc.py`) on the validation set. While training you can monitor training through real time ploting which automaticly will arise after start training. </br> 
+The structure of experiments after running a few different models might look like this (try to give meaningful names to the directories depending on what experiment you are running):
+
 
 
 2. __Hyper parameters search__
