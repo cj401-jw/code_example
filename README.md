@@ -103,7 +103,7 @@ It will train and evaluate a model with different values of learning rate define
 Case when we comparing different architectures or model parameters.
 
 
-##__Display the results__ of the hyperparameters search in a nice format
+## __Display the results__ of the hyperparameters search in a nice format
 ```
 python synthesize_results.py --parent_dir experiments/learning_rate
 ```
