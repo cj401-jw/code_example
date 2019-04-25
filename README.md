@@ -68,7 +68,14 @@ To compare experiment results we need to log all parameters which was used while
     }
 }
 ```
-This json file we loading in train.py script and propogate throught all methods which require these params. If you need to clarify something go directly to train.py.
+This json file we loading in `train.py` script and propogate throught all methods which require these params. If you need to clarify where these parameters go from this json you should directly go to `train.py`.
+
+## Logistics
+__metrics__: All metrics should be defined in `model/metric.py`
+__loss function__: defined in `train.py`. If it custom than could be defined in `net.py`
+__augmentation__: defined in `model/data_loader.py`. 
+__optimizer__: defined in `model/train.py`. 
+__architecture__: model, layers to build a model and all related to model magic are in `model/net.py`. 
 
 
 ## Quickstart
