@@ -32,7 +32,7 @@ Note: The scructure of the data could be different in that case you will need to
 
 ## Experiment parameters
 To compare experiment results we need to log all parameters which was used while training. We do this through `params.json` file. Each experiment has it's won folder `params.json` under it. Here is detailed description of this file:
-``json
+```json
 {
     "arch": "resnet18",
     "pretrain": 1,
