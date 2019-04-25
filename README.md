@@ -31,7 +31,7 @@ Data/
 Note: The scructure of the data could be different in that case you will need to update fetch_dataloader function in data_loader.py.
 
 ## Experiment parameters
-To compare experiment results we need to log all parameters which was used while training. We do this through `params.json` file. Each experiment has it's won folder `params.json` under it. Here is detailed description of this file:
+To compare experiment results we need to log all parameters which was used while training. We do this through `params.json` file. Each experiment has it's own folder and `params.json` under it. Here is detailed description of this file:
 ```json
 {
     "arch": "resnet18",
@@ -40,13 +40,13 @@ To compare experiment results we need to log all parameters which was used while
     "im_sz": 224,
     "batch_size": 128,
     "bs_test": 16,
-    "learning_rate": [     # learning rate for each layer groups
+    "learning_rate": [     learning rate for each layer groups
         0.002,
         0.002,
         0.002
     ],
     "wd": 0.0001,
-    "ps": 0.5,             # dropout for head classifier layer
+    "ps": 0.5,             dropout for head classifier layer
     "num_epochs": 10,
     "num_workers": 4,
     "cuda": 1,
@@ -60,7 +60,7 @@ To compare experiment results we need to log all parameters which was used while
         "min_delta": 0.01,
         "minimize": 1
     },
-    "hyper_search": {     # we use it when run search_hyperparams.py
+    "hyper_search": {     we use it when run search_hyperparams.py
         "ps": [
             0.5,
             0.75
@@ -68,9 +68,17 @@ To compare experiment results we need to log all parameters which was used while
     }
 }
 ```
+This json file we loading in train.py script and propogate throught all methods which require these params. If you need to clarify something go directly to train.py.
 
 
 ## Quickstart
 
-1. __Create a folder for experiment and parameters__: Create a folder with experiment name under `experiments` folder with `params.json`. Put template structure for json file. 
-2. __Run experiment__: To run the experiment just 
+__Train single model.__
+1. Create a folder with experiment name under `experiments` folder with `params.json`. 
+2. To run the experiment just 
+```
+python train.py --data_dir data/imagenet/ --model_dir experiments/resnet18/
+```
+It will instantiate a model and train it on the training set following the hyperparameters specified in `params.json`. It will also evaluate some metrics on the validation set. While training you can monitor training through real time ploting which automaticly will arise after start training. Figure with training process will be saved in the experiment folder after training finished.
+
+__Hyper parameters search.__
