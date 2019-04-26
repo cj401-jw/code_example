@@ -140,32 +140,31 @@ __Important notes__:
 2. Pay attention we can do search only for those params which we have in this `params.json` file. 
 3. One run one variable to search. To run search for several variable is in todo list.
 
-
-### __Display the results__ of the hyperparameters search in a nice format
-This script runs automaticaly within searching hyperparasm but also could be runned separately.
-```
-python synthesize_results.py --parent_dir experiments/learning_rate
-```
-It will create search params results in tabular format and if you want to see results in graphic way please use
-```
-python plot_results.py --parent_dir experiments/learning_rate
-```
-
 ### __Evaluation on the test set__ 
 Once you've run many experiments and selected your best model and hyperparameters based on the performance on the validation set, you can finally evaluate the performance of your model on the test set. Run
 ```
 python evaluate.py --data_dir data/64x64_SIGNS --model_dir experiments/base_model
 ```
 
+### __Display the results__ 
+of the hyperparameters search in a nice format. This script runs automaticaly within searching hyperparasm but also could be runned separately.
+```
+python synthesize_results.py --parent_dir experiments/learning_rate
+```
+It will create search params results in tabular format. </br> 
+If you want to see results in __graphical__ way please run.
+```
+python plot_results.py --parent_dir experiments/learning_rate
+```
+This script also runs automaticaly within searching hyperparams.
+
+
+
 __TODO__:
-- describe how to use this code
+- describe how to use this code                  <- DONE
+- clean up code in scripts                       
 - update Early Stopping
 - compare performance with fast.ai library
 - run search_params.py with weights
 - add monitoring of activations/gradients
 - add monitoring of weights/updates magnitude (histogram of all layers)
-
-
-
-
-
