@@ -135,6 +135,9 @@ The structure of completed params searching might look like this:
 │           ├── learning_rate_0.0001      
 │           └── learning_rate_0.00001     
 ```
+So as you can see it automaticaly creates folder for each value of search variable (parameter). The scrtucture 
+of these folders are the same as after running `train.py`.
+
 __Important notes__: 
 1. You can run for example several different architectures not just params. 
 2. Pay attention we can do search only for those params which we have in this `params.json` file. 
