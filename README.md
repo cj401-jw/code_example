@@ -143,6 +143,9 @@ __Important notes__:
 2. Pay attention we can do search only for those params which we have in this `params.json` file. 
 3. One run one variable to search. To run search for several variable is in todo list.
 
+## __Debugging__
+To check that new architecture working we can overfit it on a small dataset. To dicrease a dataset uncomment line of code in the `model/data_loader.py`. Also turn off or set lighter augmentation. As result model should show 100 % accuracy or any metric you use.
+
 ### __Evaluation on the test set__ 
 Once you've run many experiments and selected your best model and hyperparameters based on the performance on the validation set, you can finally evaluate the performance of your model on the test set. Run
 ```
