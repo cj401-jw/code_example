@@ -44,6 +44,9 @@ Data/
 Note: The scructure of the data could be different in that case you will need to update `fetch_dataloader()` function in `data_loader.py`.
 
 ## Experiment parameters
+TODO: While experiments it's obvious that net.py script should be in experiment folder. When you performed some experiment and then changed model (some tiny chenges) you can forget what model was. To fix it it's better to have a model folder within each experiment you want to log a model.
+
+
 To compare experiment results we need to log all parameters which was used while training. We do this through `params.json` file. Each experiment has it's own folder and `params.json` under it. Here is detailed description of this file:
 ```json
 {
