@@ -10,9 +10,10 @@ This is a template of project code leveraged from [Stanford cs230 Deep Learning]
 ├── notebooks               <- if you need to debug or try new idea, poc
 ├── experiments             
 │   └── experiment_name     <- each experiment has it own folder
-│       └── params.json     <- file contain all params for training
+│       ├── params.json     <- file contain all params for training
+│       └── model.py        <- architecture to try, building block to try 
 ├── model 
-│   ├── net.py              <- model, layers to build a model and all related to model magic
+│   ├── net.py              <- model, layers to build a model and all related to model magic, cleaned versions 
 │   ├── metric.py           <- all metrics defined here and put all together in metrics dict
 │   └── data_loader.py      <- augm storied here as well as all stuff related to dataset
 ├── include.py              <- script contains settings, imported modules, imagenet stats for norm and so on 
@@ -44,9 +45,6 @@ Data/
 Note: The scructure of the data could be different in that case you will need to update `fetch_dataloader()` function in `data_loader.py`.
 
 ## Experiment parameters
-TODO: While experiments it's obvious that net.py script should be in experiment folder. When you performed some experiment and then changed model (some tiny chenges) you can forget what model was. To fix it it's better to have a model folder within each experiment you want to log a model.
-
-
 To compare experiment results we need to log all parameters which was used while training. We do this through `params.json` file. Each experiment has it's own folder and `params.json` under it. Here is detailed description of this file:
 ```json
 {
@@ -89,7 +87,7 @@ This json file we loading in `train.py` script and propogate throught all method
 ## __Running experiments__
 
 ### __Train single model__</br>
-Create a folder with experiment name under `experiments` folder with `params.json`. It should looks like `experiments/resnet18/params.json`. Then just run the experiment:
+Create a folder with experiment name under `experiments` folder with `params.json`. It should looks like `experiments/resnet18/params.json`. Also experiment folder should contains `*.py` file with architecture. The name of this file could be arbitrary but important that folder should contains only one `*.py`. The file should contain function which init architecture. The name of this func should be the same as value of "arch" variable in `params.json`.  Then just run the experiment:
 ```
 python train.py --data_dir data/imagenet/ --model_dir experiments/resnet18/
 ```
@@ -102,6 +100,7 @@ The structure of completed experiment might look like this (try to give meaningf
 │       ├── metrics_val_best_weights.json        <- best weights (based on valid accuracy)
 │       ├── params.json             <- the list of hyperparameters, in json format
 │       ├── history.json            <- history of training 
+│       ├── model.py                <- model architecture
 │       ├── augm.pkl                <- used augmentation
 │       ├── train.log               <- he training log (everything we print to the console)
 │       ├── train_history.png       <- train summaries in figure
@@ -172,8 +171,8 @@ This script also runs automaticaly within searching hyperparams.
 __TODO__:
 - describe how to use this code                  <- DONE
 - clean up code in scripts                       
-- update Early Stopping
+- update Early Stopping                          <- DONE
 - compare performance with fast.ai library
-- run search_params.py with weights
+- integrate TensorBoard
 - add monitoring of activations/gradients
 - add monitoring of weights/updates magnitude (histogram of all layers)
