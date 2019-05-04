@@ -3,6 +3,151 @@
 from include import *
 
 
+class EarlyStopping(object):
+    def __init__(self, optimizer, monitor_metric=False, mode='minimize', patience=10):
+        """Callback. Early stops the training if validation loss doesn't improve 
+        after a given patience.
+        Inputs:
+        - monitor: (string) name of validation metric to track
+        - mode: (string) E {'minimize', 'maximize'}
+        - patience: (int) number of epochs to wait after we found no improvement"""
+
+        self.optimizer = optimizer
+        self.monitor_metric = monitor_metric
+        self.patience = patience
+        self.mode = mode
+        
+        self.best_metric = None
+        self.num_bad_epochs = 0
+        self.stop_train = False
+
+    def update(self, batch_metrics):
+        """Each call this func is comparing current batch metric with last on in the
+        history, if delta is less than min_delta than counter + 1. To break the training 
+        loop func should returns False."""
+        
+        # if monitor_metric doesn't define that skip early stopping
+        if self.monitor_metric == False: return False
+        
+        # unpack monitor metric from metrics
+        metric = batch_metrics[self.monitor_metric]   
+
+        if self.best_metric is None: self.best_metric = metric
+            
+        # if 'minimize' than metric should lower that best otherwise start counter
+        # if 'maximize' than metric should higher that best otherwise start counter
+        compare_sign = operator.gt if self.mode=='minimize' else operator.lt
+        if compare_sign(metric, self.best_metric):
+            self.num_bad_epochs += 1
+            print(f'- EarlyStopping counter: {self.num_bad_epochs} out of {self.patience}')
+            if self.num_bad_epochs >= self.patience: self.stop_train = True
+        else:
+            self.best_metric = metric
+            self.num_bad_epochs = 0  
+            self.stop_train = False
+        return self.stop_train
+
+
+# class EarlyStopping(object):
+#     def __init__(self, optimizer, monitor_metric=False, minimize=True, patience=5, min_delta=0.1):
+#         """Old implementation. Callback. We have two options to define criteria for stopping. First is to track delta
+#         between train and validation metric. When this defference encreasing that stop
+#         training. Second option, implemented here, is to track monitor metric and if
+#         this metric doesn't imporve patience epochs that stop training. We check abs difference
+#         and if metric doesn't change (increse or decrease, don't care) than we stop training.
+#         Means that we stop training when monitor metric on plato. But we can define how many epochs
+#         we can wait (patience).
+
+#         Inputs:
+#         - monitor: (string) name of validation metric to track.
+#         - patience: (int) number of epochs to wait after we found no improvement.
+#         - min_delta: (int) minimum change in the monitored quantity to qualify as 
+#           an improvement, i.e. an absolute change of less than min_delta, will 
+#           count as no improvement."""
+
+#         self.optimizer = optimizer
+#         self.monitor_metric = monitor_metric
+#         self.patience = patience
+#         self.min_delta = min_delta
+        
+#         self.metric_history = [0.001]
+#         self.counter = 0
+
+#     def update(self, batch_metrics):
+#         """Each call this func is comparing current batch metric with last on in the
+#         history, if delta is less than min_delta than counter + 1."""
+        
+#         # if monitor_metric doesn't define that skip early stopping
+#         if self.monitor_metric == False:
+#             return False
+        
+#         # unpack monitor metric from metrics
+#         metric = batch_metrics[self.monitor_metric]   
+
+#         # calculate delta between current batch metric and last one in history
+#         if np.abs(self.metric_history[-1] - metric) < self.min_delta: self.counter += 1
+#         else: self.counter = 0 
+
+#         # append curent batch metric to history
+#         self.metric_history.append(metric)
+
+#         stop_train = True if self.counter == self.patience else False
+#         return stop_train
+
+        
+class RealTimeMonitoring(object):
+    """Class visualizing training in real time. Helps to monitor and 
+    debug nn while training. Takes history dict updates while trainins.
+    Pay attention history.json doesn't exist yet. We are using history 
+    variable fro train.py script on the fly.
+    
+    Example:
+    
+    --init history = {}--
+    monitor = RealTimeMonitoring(history)
+    --update history--
+    monitor.update(history)
+    
+    Inputs:
+    - history: (dict) containing values of metrics for train and valid states."""
+    
+    def __init__(self, history):
+        """Automaticaly build figure based on number of metrics. Each metric
+        has it's own plot. Each plot contain two curves: train and valid."""
+        
+        self.metrics = list(history['train'].keys())
+        num_metrics = len(self.metrics)
+        self.fig, self.axes = plt.subplots(1, num_metrics, figsize=(16, 6))
+        # just for visual comford after first epoch
+        for ax in (self.axes.flatten()):
+            ax.set_ylabel("Y-label", fontdict={'fontsize': 12}); ax.set_xlabel('X-label')
+            ax.set_title("Title", fontdict={'fontsize': 12})
+            
+    def _animate(self, history, ax, metric):
+        """Func update one axes with train and valid curves of one metric. 
+        So this is one plot of one metric but two curves: train and valid.
+        Inputs:
+        - history: (dict) updated hsitory with last batch metrics
+        - ax: (axes) where we need to plot metric for train, valid
+        - metric: (scting) metric which we need to plot."""
+        
+        ax.clear()
+        for index, (ax, state) in enumerate(zip([ax, ax], ['train', 'valid'])):
+            data = history[state][ metric ]
+            ax.plot(data, label=f'{state}')
+            ax.set_ylabel(f'{metric}', fontdict={'fontsize': 12})
+            ax.set_xlabel('Epochs'); 
+            ax.set_title(f'{metric}', fontdict={'fontsize': 12})
+            ax.legend()
+            
+    def update(self, history):
+        """Call function to update the figure with plots."""
+        
+        # number of plots (axes) is equal to number of metrics.
+        for index, ax in enumerate(self.axes.flatten()):
+            animation.FuncAnimation(self.fig, self._animate(history, ax, self.metrics[index]), interval=1000)
+            ax.grid(); plt.pause(0.001)
+
 class RunningAverage():
     """A simple class that maintains the running average of a quantity.
         
@@ -242,15 +387,15 @@ def trainer(model, optimizer, scheduler, loss_function,
 
 
 # TODO: Rewrite input args to apropriate vars
-def check_augm_show_images(args, rows=3, cols=4):
+def check_augm_show_images(batch_size, dl, rows=3, cols=4):
     """For simple classification task. To check the 
     augmentation we are ploting images with augm."""
     
     # check that we have enough images in batch
-    assert rows*cols <= args["batch_size"], \
+    assert rows*cols <= batch_size, \
     "You're trying to plot more images then batch_size."
         
-    images, labels = next(iter(args["dataloaders"]['train']))
+    images, labels = next(iter(dl))
     fig, axes = plt.subplots(nrows=rows, ncols=cols, 
                              figsize=(14, 10))
     for i, ax in enumerate(axes.flatten()):

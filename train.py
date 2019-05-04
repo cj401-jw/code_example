@@ -2,6 +2,7 @@ from include import *
 import utils
 from model import data_loader, net, metric
 from evaluate import evaluate
+from pathlib import Path
 
 # parse input data
 parser = argparse.ArgumentParser()
@@ -12,106 +13,27 @@ parser.add_argument('--restore_file', default=None,
                     training") # 'best' or 'train'
 
 
-class RealTimeMonitoring(object):
-    """Class visualizing training in real time. Helps to monitor and 
-    debug nn while training. Takes history dict updates while trainins.
-    Pay attention history.json doesn't exist yet. We are using history 
-    variable fro train.py script on the fly.
-    
-    Example:
-    
-    --init history = {}--
-    monitor = RealTimeMonitoring(history)
-    --update history--
-    monitor.update(history)
-    
+def prepare_source_file(model_dir):
+    """Load source *.py file with architecture code which located
+    in /model_dir. This folder should contain only one *.py file.
     Inputs:
-    - history: (dict) containing values of metrics for train and valid states."""
+    - model_dir: (string) we use this to find source *.py file
+      with architecture.
+    Returns:
+    - source: (module) python module."""
     
-    def __init__(self, history):
-        """Automaticaly build figure based on number of metrics. Each metric
-        has it's own plot. Each plot contain two curves: train and valid."""
-        
-        self.metrics = list(history['train'].keys())
-        num_metrics = len(self.metrics)
-        self.fig, self.axes = plt.subplots(1, num_metrics, figsize=(16, 6))
-        # just for visual comford after first epoch
-        for ax in (self.axes.flatten()):
-            ax.set_ylabel("Y-label", fontdict={'fontsize': 12}); ax.set_xlabel('X-label')
-            ax.set_title("Title", fontdict={'fontsize': 12})
-            
-    def _animate(self, history, ax, metric):
-        """Func update one axes with train and valid curves of one metric. 
-        So this is one plot of one metric but two curves: train and valid.
-        Inputs:
-        - history: (dict) updated hsitory with last batch metrics
-        - ax: (axes) where we need to plot metric for train, valid
-        - metric: (scting) metric which we need to plot."""
-        
-        ax.clear()
-        for index, (ax, state) in enumerate(zip([ax, ax], ['train', 'valid'])):
-            data = history[state][ metric ]
-            ax.plot(data, label=f'{state}')
-            ax.set_ylabel(f'{metric}', fontdict={'fontsize': 12})
-            ax.set_xlabel('Epochs'); 
-            ax.set_title(f'{metric}', fontdict={'fontsize': 12})
-            ax.legend()
-            
-    def update(self, history):
-        """Call function to update the figure with plots."""
-        
-        # number of plots (axes) is equal to number of metrics.
-        for index, ax in enumerate(self.axes.flatten()):
-            animation.FuncAnimation(self.fig, self._animate(history, ax, self.metrics[index]), interval=1000)
-            ax.grid(); plt.pause(0.001)
-        
-        
-class EarlyStopping(object):
-    def __init__(self, optimizer, monitor_metric=False, minimize=True, patience=5, min_delta=0.1):
-        """Callback. We have two options to define criteria for stopping. First is to track delta
-        between train and validation metric. When this defference encreasing that stop
-        training. Second option, implemented here, is to track monitor metric and if
-        this metric doesn't imporve patience epochs that stop training. We check abs difference
-	and if metric doesn't change (increse or decrease, don't care) than we stop training.
-	Means that we stop training when monitor metric on plato. But we can define how many epochs
-	we can wait (patience).
-
-        Inputs:
-        - monitor: (string) name of validation metric to track.
-        - patience: (int) number of epochs to wait after we found no improvement.
-        - min_delta: (int) minimum change in the monitored quantity to qualify as 
-          an improvement, i.e. an absolute change of less than min_delta, will 
-          count as no improvement."""
-
-        self.optimizer = optimizer
-        self.monitor_metric = monitor_metric
-        self.patience = patience
-        self.min_delta = min_delta
-        
-        self.metric_history = [0.001]
-        self.counter = 0
-
-    def update(self, batch_metrics):
-        """Each call this func is comparing current batch metric with last on in the
-        history, if delta is less than min_delta than counter + 1."""
-        
-        # if monitor_metric doesn't define that skip early stopping
-        if self.monitor_metric == False:
-            return False
-        
-        # unpack monitor metric from metrics
-        metric = batch_metrics[self.monitor_metric]   
-
-        # calculate delta between current batch metric and last one in history
-        if np.abs(self.metric_history[-1] - metric) < self.min_delta: self.counter += 1
-        else: self.counter = 0 
-
-        # append curent batch metric to history
-        self.metric_history.append(metric)
-
-        stop_train = True if self.counter == self.patience else False
-        return stop_train
+    # find source for architecture in model_dir, should be single *.py file
+    source = glob.glob(model_dir+"/*.py")
+    assert len(source)==1, f"{source}"
     
+    # format string for importing as module
+    source = source[0].replace(".py", "").replace("/", "."); 
+    assert "/" not in source
+
+    source = __import__(f"{source}", fromlist=[""]); 
+    assert params.arch in source.__all__ 
+    
+    return source
 
 def train(model, optimizer, scheduler, loss_fn, dataloader, metrics, params):
     """Train the model on `num_steps` batches (e.g. one epoch).
@@ -193,9 +115,8 @@ def train_and_evaluate(model, train_dataloader, val_dataloader, optimizer, sched
     # early stopping 
     early_stopping = params.early_stopping   
     assert type(early_stopping) == dict, "early_stopping variable should be a dict."
-    callback = EarlyStopping(optimizer, monitor_metric=early_stopping['monitor_metric'], 
-                             minimize=early_stopping['minimize'], patience=early_stopping['patience'], 
-                             min_delta=early_stopping['min_delta'])
+    callback = utils.EarlyStopping(optimizer, monitor_metric=early_stopping['monitor_metric'], 
+                                   mode=early_stopping['mode'], patience=early_stopping['patience'])
     
     # init history dict 
     assert type(metrics) == dict, "Metrics variable is not a dict."
@@ -203,7 +124,7 @@ def train_and_evaluate(model, train_dataloader, val_dataloader, optimizer, sched
     history = {'train' : {k: [] for k in list_of_metircs}, 'valid': {k: [] for k in list_of_metircs}}
     
     # init visualization
-    rt_monitoring = RealTimeMonitoring(history)
+    rt_monitoring = utils.RealTimeMonitoring(history)
     # allows to run script without closing figure & give a time to load empty plot
     plt.show(block=False); plt.pause(0.1)
             
@@ -264,7 +185,6 @@ def train_and_evaluate(model, train_dataloader, val_dataloader, optimizer, sched
     utils.save_model_history_graphics(history, model_dir)
     
 
-
 if __name__ == '__main__':
     
     # release torch memory if filled
@@ -297,43 +217,56 @@ if __name__ == '__main__':
     # augmentation logging
     pkl_path = os.path.join(args.model_dir, 'augm.pkl')
     data_loader.save_augmentation(data_loader.augm, pkl_path)
-    
     logging.info("- done.")
     
-    # Define the model and optimizer
-    if params.arch=="resnet18": model = net.resnet18(num_classes=params.n_clas, pretrained=params.pretrain,ps=params.ps)
-    elif params.arch=="se_resnet18": model = net.se_resnet18(num_classes=params.n_clas, pretrained=params.pretrain, ps=params.ps)
-    elif params.arch=="cbam_rn18": model = net.cbam_resnet18(num_classes=params.n_clas, pretrained=params.pretrain, ps=params.ps)
-    elif params.arch=="resnet152": model = net.resnet152(num_classes=params.n_clas, pretrained=params.pretrain, ps=params.ps)
+    # read source file with architecture from /model_dir
+    source = prepare_source_file(model_dir=args.model_dir)
+    logging.info(f"Source code loaded from - {source.__file__}.")
+    
+    # init the model and put to cuda if available
+    model = source.__dict__[f"{params.arch}"](num_classes=params.n_clas)
     model = model.to(device)
-    logging.info(f"- architecture - {params.arch}.")
+    logging.info(f"Architecture used - {params.arch}.")
     
-    # inform that early stopping disabled
+    # inform early stopping activation status
     if params.early_stopping['monitor_metric']==False: logging.info("- early stopping disabled.")
-    else: logging.info("- early stopping enabled.")
+    else: logging.info("Early stopping enabled.")
     
-    for layer in model.parameters(): layer.requires_grad = False
+    # set calculate gradients for all or separate layers
+    for layer in model.parameters(): layer.requires_grad = True
     for i in model.fc.parameters(): i.requires_grad = True
     
     # split model to differnet groups and assign lr for each
-    optimizer = utils.get_optim(model=model, idx_to_split_model=[5, 8], optimizer=torch.optim.Adam, 
-                                lrs=params.learning_rate, wd=params.wd)    
-#     optimizer = torch.optim.Adam(model.parameters(), lr=params.learning_rate, weight_decay=params.wd)
+    optimizer = utils.get_optim(
+        model=model, idx_to_split_model=[5, 8], optimizer=torch.optim.Adam, lrs=params.learning_rate, wd=params.wd,
+    )    
 
     # fetch loss function and metrics
     loss_fn = torch.nn.CrossEntropyLoss()  
     
-    # SCHEDULER
-    if params.scheduler == "one_cycle": \
-        scheduler = utils.OneCycle(params.num_epochs, optimizer, div_factor=params.div_factor,   
-                                   pct_start=params.pct_start, dl_len=len(train_dl))
-    elif params.scheduler == "cosine_annealing": \
+    # select scheduler
+    if params.scheduler == "one_cycle": 
+        scheduler = utils.OneCycle(
+            params.num_epochs, optimizer, div_factor=params.div_factor, pct_start=params.pct_start, dl_len=len(train_dl),
+            )
+    elif params.scheduler == "cosine_annealing": 
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=len(train_dl), eta_min=1e-6)
     
     metrics = metric.metrics
-    monitor_metric = "loss"
+    monitor_metric = params.early_stopping["monitor_metric"]
 
     # Train the model
     logging.info("Starting training for {} epoch(s)".format(params.num_epochs))
-    train_and_evaluate(model, train_dl, val_dl, optimizer, scheduler, monitor_metric, loss_fn, metrics, params, 
-                       args.model_dir, args.restore_file)
+    train_and_evaluate(
+        model=model, 
+        train_dataloader=train_dl, 
+        val_dataloader=val_dl, 
+        optimizer=optimizer, 
+        scheduler=scheduler, 
+        monitor_metric=monitor_metric, 
+        loss_fn=loss_fn, 
+        metrics=metrics, 
+        params=params, 
+        model_dir=args.model_dir, 
+        restore_file=args.restore_file,
+        )

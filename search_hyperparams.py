@@ -16,16 +16,31 @@ import sys
 import plot_results
 import utils
 import synthesize_results
-
+from shutil import copyfile
+from pathlib import Path
 
 PYTHON = sys.executable
 parser = argparse.ArgumentParser()
-parser.add_argument('--parent_dir', default='experiments/resnet18/learning_rate',
-                    help='Directory containing params.json')
+parser.add_argument('--parent_dir', default='experiments/resnet18/learning_rate', help='Directory containing params.json')
 parser.add_argument('--data_dir', default='data/imagenet/', help="Directory containing the dataset")
 
 
-def launch_training_job(parent_dir, data_dir, job_name, params, restore_file):
+def make_source_copy(parent_dir, job_name):
+    """We need to take source *.py file from /parent_dir and copy it to 
+    the /parent_dir/job_name folder since train.py will search it. Need
+    to refactor this code."""
+    
+    path = Path(parent_dir)
+    source_path = next(path.glob("*.py"))
+    f_name = source_path.name
+    src = str(source_path)
+    dst = source_path.parent.joinpath(job_name).joinpath(f_name)
+    
+    # copy file
+    copyfile(src=src, dst=dst)
+    
+
+def launch_training_job(parent_dir, data_dir, job_name, params):
     """Launch training of the model with a set of hyperparameters in parent_dir/job_name
     Inputs:
     - parent_dir: (string) folder of variable name which we tune.
@@ -42,8 +57,11 @@ def launch_training_job(parent_dir, data_dir, job_name, params, restore_file):
 
     # write parameters in json file
     json_path = os.path.join(model_dir, 'params.json')
-    params.save(json_path)   
+    params.save(json_path)  
     
+    # copy source file to job_name folder
+    make_source_copy(parent_dir, job_name)
+
     # launch training with this config
     cmd = "{python} train.py --model_dir={model_dir} --data_dir {data_dir}".format(
         python=PYTHON, model_dir=model_dir, data_dir=data_dir)
@@ -66,9 +84,9 @@ if __name__ == "__main__":
         params.__dict__[f'{search_param_name}'] = value
         
         # launch job (name has to be unique)
-        if type(value) == list: value = '_'.join([str(i) for i in value])  # hand if value is a  list
+        if type(value) == list: value = '_'.join([str(i) for i in value])  # hand if value is a list
         job_name = "{name}_{value}".format(name=search_param_name, value=value)
-        launch_training_job(args.parent_dir, args.data_dir, job_name, params, args.parent_dir)
+        launch_training_job(args.parent_dir, args.data_dir, job_name, params)
    
     # save figure with results to the dist
     plotter = plot_results.Plotter(args.parent_dir)

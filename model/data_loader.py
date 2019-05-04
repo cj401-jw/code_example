@@ -3,6 +3,7 @@ import pickle
 import torch
 import PIL
 import os
+import cv2
 
 # for image normalization
 imagenet_stats = ([0.485, 0.456, 0.406], 
@@ -13,17 +14,21 @@ sz = 224
 # list of augmentations
 augm = {
     "train": torchvision.transforms.Compose([
-        torchvision.transforms.Resize(sz),
-    #    torchvision.transforms.RandomHorizontalFlip(),
-     #   torchvision.transforms.RandomResizedCrop(sz),
-        torchvision.transforms.RandomRotation(30),
-      #  torchvision.transforms.ColorJitter(brightness=0.6, contrast=0.6, saturation=0.6),
-        torchvision.transforms.ToTensor(),
-        torchvision.transforms.Normalize(*imagenet_stats)]),
+       torchvision.transforms.Resize(sz),
+       torchvision.transforms.RandomHorizontalFlip(),
+       torchvision.transforms.RandomResizedCrop(sz),
+       torchvision.transforms.RandomRotation(30),
+       torchvision.transforms.RandomGrayscale(),
+       torchvision.transforms.ColorJitter(brightness=0.5, contrast=0.5, saturation=0.5),
+       torchvision.transforms.ToTensor(),
+       torchvision.transforms.Normalize(*imagenet_stats),
+    ]),
     "valid": torchvision.transforms.Compose([
         torchvision.transforms.Resize(sz),
         torchvision.transforms.ToTensor(),
-        torchvision.transforms.Normalize(*imagenet_stats)])}
+        torchvision.transforms.Normalize(*imagenet_stats),
+    ]),
+}
 
 
 def save_augmentation(d, pkl_path):
@@ -39,19 +44,17 @@ def save_augmentation(d, pkl_path):
 
 def fetch_dataloader(types, data_dir, params):
     """Fetches the DataLoader object for each type in types from data_dir.
-    
     Inputs:
     - types: (list) has one or more of 'train', 'valid', 'test' depending 
       on which data is required
     - data_dir: (string) directory containing the dataset 
     - params: (Params) hyperparameters
-    
     Returns:
     - data : (dict) contains the DataLoader object for each type in types."""
     
     # helper lambda function to open image
-    open_image = lambda x: PIL.Image.open(x)
-    
+#     open_image = lambda x: PIL.Image.open(x)
+    open_image = lambda x: PIL.Image.fromarray(cv2.imread(x))  
     dataloaders = {}
     for split in ['train', 'valid', 'test']:
         if split in types:
@@ -73,6 +76,5 @@ def fetch_dataloader(types, data_dir, params):
             dataloaders[split] = dl
     
     # test mode to check that model overfit the data
-#     dataloaders['train'].dataset.samples = dataloaders['train'].dataset.samples[:500]
-    
+#     dataloaders['train'].dataset.samples = dataloaders['train'].dataset.samples[:2500]
     return dataloaders

@@ -1,0 +1,36 @@
+{
+    "arch": "se_after_dw",
+    "pretrain": 0,
+    "n_clas": 9,
+    "im_sz": 224,
+    "batch_size": 64,
+    "bs_test": 16,
+    "learning_rate": [
+        0.001,
+        0.001,
+        0.001
+    ],
+    "wd": 1e-08,
+    "ps": 0.5,
+    "num_epochs": 50,
+    "num_workers": 4,
+    "cuda": 1,
+    "scheduler": "one_cycle",
+    "div_factor": 25,
+    "pct_start": 0.2,
+    "save_summary_steps": 1,
+    "early_stopping": {
+        "patience": 5,
+        "monitor_metric": "loss",
+        "mode": "minimize"
+    },
+    "hyper_search": {
+        "arch": [
+"se_all",
+            "se_after_pw",
+            "se_after_dw",
+            "se_after_pwlinear",
+            "mobilenet_v2"
+        ]
+    }
+}

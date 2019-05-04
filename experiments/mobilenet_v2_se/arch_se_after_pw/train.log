@@ -1,0 +1,256 @@
+2019-05-04 10:47:35,832:INFO: Loading the datasets...
+2019-05-04 10:47:35,881:INFO: - done.
+2019-05-04 10:47:35,884:INFO: Source code loaded from - /home/denys/DataScienc/projects/owoschi/experiments/mobilenet_v2_se/arch_se_after_pw/model.py.
+2019-05-04 10:47:37,545:INFO: Architecture used - se_after_pw.
+2019-05-04 10:47:37,545:INFO: Early stopping enabled.
+2019-05-04 10:47:37,550:INFO: Starting training for 3 epoch(s)
+2019-05-04 10:47:37,759:INFO: Epoch 1/3
+2019-05-04 10:47:43,386:INFO: - Train metrics: accuracy: 0.168 ; loss: 2.150
+2019-05-04 10:47:44,143:INFO: - Eval metrics : accuracy: 0.205 ; loss: 2.087
+2019-05-04 10:47:44,394:INFO: - Found new best accuracy
+2019-05-04 10:47:44,394:INFO: Epoch 2/3
+2019-05-04 10:47:48,759:INFO: - Train metrics: accuracy: 0.259 ; loss: 1.978
+2019-05-04 10:47:49,320:INFO: - Eval metrics : accuracy: 0.314 ; loss: 1.872
+2019-05-04 10:47:49,553:INFO: - Found new best accuracy
+2019-05-04 10:47:49,554:INFO: Epoch 3/3
+2019-05-04 10:47:53,858:INFO: - Train metrics: accuracy: 0.318 ; loss: 1.857
+2019-05-04 10:47:54,456:INFO: - Eval metrics : accuracy: 0.315 ; loss: 1.831
+2019-05-04 10:47:54,764:INFO: - Found new best accuracy
+2019-05-04 10:49:44,593:INFO: Loading the datasets...
+2019-05-04 10:49:44,623:INFO: - done.
+2019-05-04 10:49:44,626:INFO: Source code loaded from - /home/denys/DataScienc/projects/owoschi/experiments/mobilenet_v2_se/arch_se_after_pw/model.py.
+2019-05-04 10:49:46,362:INFO: Architecture used - se_after_pw.
+2019-05-04 10:49:46,363:INFO: Early stopping enabled.
+2019-05-04 10:49:46,372:INFO: Starting training for 10 epoch(s)
+2019-05-04 10:49:46,580:INFO: Epoch 1/10
+2019-05-04 10:49:52,084:INFO: - Train metrics: accuracy: 0.162 ; loss: 2.164
+2019-05-04 10:49:52,653:INFO: - Eval metrics : accuracy: 0.137 ; loss: 2.240
+2019-05-04 10:49:52,924:INFO: - Found new best accuracy
+2019-05-04 10:49:52,925:INFO: Epoch 2/10
+2019-05-04 10:49:57,821:INFO: - Train metrics: accuracy: 0.226 ; loss: 2.053
+2019-05-04 10:49:58,389:INFO: - Eval metrics : accuracy: 0.253 ; loss: 1.992
+2019-05-04 10:49:58,681:INFO: - Found new best accuracy
+2019-05-04 10:49:58,682:INFO: Epoch 3/10
+2019-05-04 10:50:03,379:INFO: - Train metrics: accuracy: 0.302 ; loss: 1.891
+2019-05-04 10:50:03,946:INFO: - Eval metrics : accuracy: 0.345 ; loss: 1.955
+2019-05-04 10:50:04,217:INFO: - Found new best accuracy
+2019-05-04 10:50:04,218:INFO: Epoch 4/10
+2019-05-04 10:50:09,003:INFO: - Train metrics: accuracy: 0.339 ; loss: 1.823
+2019-05-04 10:50:09,588:INFO: - Eval metrics : accuracy: 0.375 ; loss: 1.761
+2019-05-04 10:50:09,880:INFO: - Found new best accuracy
+2019-05-04 10:50:09,881:INFO: Epoch 5/10
+2019-05-04 10:50:14,708:INFO: - Train metrics: accuracy: 0.372 ; loss: 1.748
+2019-05-04 10:50:15,257:INFO: - Eval metrics : accuracy: 0.403 ; loss: 1.649
+2019-05-04 10:50:15,506:INFO: - Found new best accuracy
+2019-05-04 10:50:15,506:INFO: Epoch 6/10
+2019-05-04 10:50:20,391:INFO: - Train metrics: accuracy: 0.396 ; loss: 1.672
+2019-05-04 10:50:20,938:INFO: - Eval metrics : accuracy: 0.405 ; loss: 1.646
+2019-05-04 10:50:21,257:INFO: - Found new best accuracy
+2019-05-04 10:50:21,258:INFO: Epoch 7/10
+2019-05-04 10:50:26,034:INFO: - Train metrics: accuracy: 0.414 ; loss: 1.630
+2019-05-04 10:50:26,567:INFO: - Eval metrics : accuracy: 0.442 ; loss: 1.569
+2019-05-04 10:50:26,946:INFO: - Found new best accuracy
+2019-05-04 10:50:26,947:INFO: Epoch 8/10
+2019-05-04 10:50:32,178:INFO: - Train metrics: accuracy: 0.439 ; loss: 1.578
+2019-05-04 10:50:32,759:INFO: - Eval metrics : accuracy: 0.450 ; loss: 1.536
+2019-05-04 10:50:33,085:INFO: - Found new best accuracy
+2019-05-04 10:50:33,086:INFO: Epoch 9/10
+2019-05-04 10:50:38,069:INFO: - Train metrics: accuracy: 0.456 ; loss: 1.523
+2019-05-04 10:50:38,641:INFO: - Eval metrics : accuracy: 0.461 ; loss: 1.483
+2019-05-04 10:50:38,956:INFO: - Found new best accuracy
+2019-05-04 10:50:38,956:INFO: Epoch 10/10
+2019-05-04 10:50:43,867:INFO: - Train metrics: accuracy: 0.458 ; loss: 1.505
+2019-05-04 10:50:44,408:INFO: - Eval metrics : accuracy: 0.487 ; loss: 1.468
+2019-05-04 10:50:44,690:INFO: - Found new best accuracy
+2019-05-04 10:56:04,479:INFO: Loading the datasets...
+2019-05-04 10:56:04,509:INFO: - done.
+2019-05-04 10:56:04,512:INFO: Source code loaded from - /home/denys/DataScienc/projects/owoschi/experiments/mobilenet_v2_se/arch_se_after_pw/model.py.
+2019-05-04 10:56:06,227:INFO: Architecture used - se_after_pw.
+2019-05-04 10:56:06,228:INFO: Early stopping enabled.
+2019-05-04 10:56:06,236:INFO: Starting training for 10 epoch(s)
+2019-05-04 10:56:06,451:INFO: Epoch 1/10
+2019-05-04 10:56:35,604:INFO: - Train metrics: accuracy: 0.170 ; loss: 2.139
+2019-05-04 10:56:37,222:INFO: - Eval metrics : accuracy: 0.177 ; loss: 2.113
+2019-05-04 10:56:37,497:INFO: - Found new best accuracy
+2019-05-04 10:56:37,497:INFO: Epoch 2/10
+2019-05-04 10:57:04,991:INFO: - Train metrics: accuracy: 0.266 ; loss: 1.990
+2019-05-04 10:57:06,538:INFO: - Eval metrics : accuracy: 0.220 ; loss: 3.064
+2019-05-04 10:57:06,826:INFO: - Found new best accuracy
+2019-05-04 10:57:06,826:INFO: Epoch 3/10
+2019-05-04 10:57:34,404:INFO: - Train metrics: accuracy: 0.298 ; loss: 1.914
+2019-05-04 10:57:36,013:INFO: - Eval metrics : accuracy: 0.376 ; loss: 1.747
+2019-05-04 10:57:36,303:INFO: - Found new best accuracy
+2019-05-04 10:57:36,304:INFO: Epoch 4/10
+2019-05-04 10:58:03,784:INFO: - Train metrics: accuracy: 0.334 ; loss: 1.833
+2019-05-04 10:58:05,366:INFO: - Eval metrics : accuracy: 0.376 ; loss: 1.755
+2019-05-04 10:58:05,565:INFO: Epoch 5/10
+2019-05-04 10:58:33,065:INFO: - Train metrics: accuracy: 0.351 ; loss: 1.786
+2019-05-04 10:58:34,677:INFO: - Eval metrics : accuracy: 0.422 ; loss: 1.666
+2019-05-04 10:58:35,026:INFO: - Found new best accuracy
+2019-05-04 10:58:35,026:INFO: Epoch 6/10
+2019-05-04 10:59:02,569:INFO: - Train metrics: accuracy: 0.362 ; loss: 1.748
+2019-05-04 10:59:04,152:INFO: - Eval metrics : accuracy: 0.412 ; loss: 1.597
+2019-05-04 10:59:04,366:INFO: Epoch 7/10
+2019-05-04 10:59:31,840:INFO: - Train metrics: accuracy: 0.377 ; loss: 1.706
+2019-05-04 10:59:33,448:INFO: - Eval metrics : accuracy: 0.453 ; loss: 1.502
+2019-05-04 10:59:33,749:INFO: - Found new best accuracy
+2019-05-04 10:59:33,749:INFO: Epoch 8/10
+2019-05-04 11:00:01,269:INFO: - Train metrics: accuracy: 0.393 ; loss: 1.682
+2019-05-04 11:00:02,842:INFO: - Eval metrics : accuracy: 0.488 ; loss: 1.463
+2019-05-04 11:00:03,079:INFO: - Found new best accuracy
+2019-05-04 11:00:03,080:INFO: Epoch 9/10
+2019-05-04 11:00:30,575:INFO: - Train metrics: accuracy: 0.409 ; loss: 1.636
+2019-05-04 11:00:32,193:INFO: - Eval metrics : accuracy: 0.484 ; loss: 1.430
+2019-05-04 11:00:32,486:INFO: Epoch 10/10
+2019-05-04 11:01:00,037:INFO: - Train metrics: accuracy: 0.424 ; loss: 1.595
+2019-05-04 11:01:01,606:INFO: - Eval metrics : accuracy: 0.505 ; loss: 1.388
+2019-05-04 11:01:01,836:INFO: - Found new best accuracy
+2019-05-04 11:17:24,728:INFO: Loading the datasets...
+2019-05-04 11:17:24,758:INFO: - done.
+2019-05-04 11:17:24,761:INFO: Source code loaded from - /home/denys/DataScienc/projects/owoschi/experiments/mobilenet_v2_se/arch_se_after_pw/model.py.
+2019-05-04 11:17:26,449:INFO: Architecture used - se_after_pw.
+2019-05-04 11:17:26,449:INFO: Early stopping enabled.
+2019-05-04 11:17:26,458:INFO: Starting training for 10 epoch(s)
+2019-05-04 11:17:26,666:INFO: Epoch 1/10
+2019-05-04 11:17:55,664:INFO: - Train metrics: accuracy: 0.198 ; loss: 2.091
+2019-05-04 11:17:57,266:INFO: - Eval metrics : accuracy: 0.215 ; loss: 2.101
+2019-05-04 11:17:57,558:INFO: - Found new best accuracy
+2019-05-04 11:17:57,559:INFO: Epoch 2/10
+2019-05-04 11:18:24,898:INFO: - Train metrics: accuracy: 0.349 ; loss: 1.801
+2019-05-04 11:18:26,495:INFO: - Eval metrics : accuracy: 0.307 ; loss: 2.258
+2019-05-04 11:18:26,745:INFO: - Found new best accuracy
+2019-05-04 11:18:26,745:INFO: Epoch 3/10
+2019-05-04 11:18:54,041:INFO: - Train metrics: accuracy: 0.410 ; loss: 1.631
+2019-05-04 11:18:55,671:INFO: - Eval metrics : accuracy: 0.407 ; loss: 1.768
+2019-05-04 11:18:55,905:INFO: - Found new best accuracy
+2019-05-04 11:18:55,905:INFO: Epoch 4/10
+2019-05-04 11:19:23,185:INFO: - Train metrics: accuracy: 0.466 ; loss: 1.520
+2019-05-04 11:19:24,822:INFO: - Eval metrics : accuracy: 0.479 ; loss: 1.562
+2019-05-04 11:19:25,070:INFO: - Found new best accuracy
+2019-05-04 11:19:25,071:INFO: Epoch 5/10
+2019-05-04 11:19:52,767:INFO: - Train metrics: accuracy: 0.498 ; loss: 1.410
+2019-05-04 11:19:54,307:INFO: - Eval metrics : accuracy: 0.480 ; loss: 1.592
+2019-05-04 11:19:54,579:INFO: - Found new best accuracy
+2019-05-04 11:19:54,580:INFO: Epoch 6/10
+2019-05-04 11:20:22,455:INFO: - Train metrics: accuracy: 0.549 ; loss: 1.278
+2019-05-04 11:20:24,062:INFO: - Eval metrics : accuracy: 0.521 ; loss: 1.577
+2019-05-04 11:20:24,339:INFO: - Found new best accuracy
+2019-05-04 11:20:24,340:INFO: Epoch 7/10
+2019-05-04 11:20:52,554:INFO: - Train metrics: accuracy: 0.600 ; loss: 1.155
+2019-05-04 11:20:54,178:INFO: - Eval metrics : accuracy: 0.544 ; loss: 1.354
+2019-05-04 11:20:54,444:INFO: - Found new best accuracy
+2019-05-04 11:20:54,444:INFO: Epoch 8/10
+2019-05-04 11:21:22,849:INFO: - Train metrics: accuracy: 0.668 ; loss: 0.951
+2019-05-04 11:21:24,446:INFO: - Eval metrics : accuracy: 0.553 ; loss: 1.343
+2019-05-04 11:21:24,855:INFO: - Found new best accuracy
+2019-05-04 11:21:24,856:INFO: Epoch 9/10
+2019-05-04 11:21:52,249:INFO: - Train metrics: accuracy: 0.759 ; loss: 0.732
+2019-05-04 11:21:53,896:INFO: - Eval metrics : accuracy: 0.558 ; loss: 1.346
+2019-05-04 11:21:54,216:INFO: - Found new best accuracy
+2019-05-04 11:21:54,217:INFO: Epoch 10/10
+2019-05-04 11:22:21,532:INFO: - Train metrics: accuracy: 0.811 ; loss: 0.584
+2019-05-04 11:22:23,149:INFO: - Eval metrics : accuracy: 0.566 ; loss: 1.357
+2019-05-04 11:22:23,374:INFO: - Found new best accuracy
+2019-05-04 11:52:12,228:INFO: Loading the datasets...
+2019-05-04 11:52:12,260:INFO: - done.
+2019-05-04 11:52:12,263:INFO: Source code loaded from - /home/denys/DataScienc/projects/owoschi/experiments/mobilenet_v2_se/arch_se_after_pw/model.py.
+2019-05-04 11:52:14,066:INFO: Architecture used - se_after_pw.
+2019-05-04 11:52:14,066:INFO: Early stopping enabled.
+2019-05-04 11:52:14,070:INFO: Starting training for 5 epoch(s)
+2019-05-04 11:52:14,274:INFO: Epoch 1/5
+2019-05-04 11:52:26,110:INFO: - Train metrics: accuracy: 0.431 ; loss: 1.575
+2019-05-04 11:52:27,739:INFO: - Eval metrics : accuracy: 0.127 ; loss: 3.597
+2019-05-04 11:52:28,242:INFO: - Found new best accuracy
+2019-05-04 11:52:28,243:INFO: Epoch 2/5
+2019-05-04 11:52:38,511:INFO: - Train metrics: accuracy: 0.493 ; loss: 1.198
+2019-05-04 11:52:40,154:INFO: - Eval metrics : accuracy: 0.127 ; loss: 4.687
+2019-05-04 11:52:40,523:INFO: - Found new best accuracy
+2019-05-04 11:52:40,524:INFO: Epoch 3/5
+2019-05-04 11:52:50,800:INFO: - Train metrics: accuracy: 0.545 ; loss: 1.095
+2019-05-04 11:52:52,450:INFO: - Eval metrics : accuracy: 0.240 ; loss: 4.740
+2019-05-04 11:52:52,683:INFO: - Found new best accuracy
+2019-05-04 11:52:52,683:INFO: Epoch 4/5
+2019-05-04 11:53:02,853:INFO: - Train metrics: accuracy: 0.568 ; loss: 1.041
+2019-05-04 11:53:04,548:INFO: - Eval metrics : accuracy: 0.227 ; loss: 5.469
+2019-05-04 11:53:04,761:INFO: Epoch 5/5
+2019-05-04 11:53:15,023:INFO: - Train metrics: accuracy: 0.592 ; loss: 0.998
+2019-05-04 11:53:16,639:INFO: - Eval metrics : accuracy: 0.267 ; loss: 5.244
+2019-05-04 11:53:16,890:INFO: - Found new best accuracy
+2019-05-04 12:00:01,440:INFO: Loading the datasets...
+2019-05-04 12:00:01,471:INFO: - done.
+2019-05-04 12:00:01,474:INFO: Source code loaded from - /home/denys/DataScienc/projects/owoschi/experiments/mobilenet_v2_se/arch_se_after_pw/model.py.
+2019-05-04 12:00:03,235:INFO: Architecture used - se_after_pw.
+2019-05-04 12:00:03,235:INFO: Early stopping enabled.
+2019-05-04 12:00:03,239:INFO: Starting training for 5 epoch(s)
+2019-05-04 12:00:03,440:INFO: Epoch 1/5
+2019-05-04 12:00:15,333:INFO: - Train metrics: accuracy: 0.435 ; loss: 1.574
+2019-05-04 12:00:16,931:INFO: - Eval metrics : accuracy: 0.127 ; loss: 3.650
+2019-05-04 12:00:17,197:INFO: - Found new best accuracy
+2019-05-04 12:00:17,197:INFO: Epoch 2/5
+2019-05-04 12:00:27,435:INFO: - Train metrics: accuracy: 0.504 ; loss: 1.194
+2019-05-04 12:00:29,080:INFO: - Eval metrics : accuracy: 0.127 ; loss: 4.664
+2019-05-04 12:00:29,371:INFO: - Found new best accuracy
+2019-05-04 12:00:29,371:INFO: Epoch 3/5
+2019-05-04 12:00:39,673:INFO: - Train metrics: accuracy: 0.558 ; loss: 1.092
+2019-05-04 12:00:41,321:INFO: - Eval metrics : accuracy: 0.231 ; loss: 4.733
+2019-05-04 12:00:41,587:INFO: - Found new best accuracy
+2019-05-04 12:00:41,587:INFO: Epoch 4/5
+2019-05-04 12:00:51,465:INFO: - Train metrics: accuracy: 0.567 ; loss: 1.031
+2019-05-04 12:00:53,059:INFO: - Eval metrics : accuracy: 0.247 ; loss: 5.457
+2019-05-04 12:00:53,333:INFO: - Found new best accuracy
+2019-05-04 12:00:53,333:INFO: Epoch 5/5
+2019-05-04 12:01:03,181:INFO: - Train metrics: accuracy: 0.593 ; loss: 0.991
+2019-05-04 12:01:04,787:INFO: - Eval metrics : accuracy: 0.270 ; loss: 5.251
+2019-05-04 12:01:05,085:INFO: - Found new best accuracy
+2019-05-04 12:23:21,950:INFO: Loading the datasets...
+2019-05-04 12:23:21,980:INFO: - done.
+2019-05-04 12:23:21,984:INFO: Source code loaded from - /home/denys/DataScienc/projects/owoschi/experiments/mobilenet_v2_se/arch_se_after_pw/model.py.
+2019-05-04 12:23:23,701:INFO: Architecture used - se_after_pw.
+2019-05-04 12:23:23,701:INFO: Early stopping enabled.
+2019-05-04 12:23:23,706:INFO: Starting training for 5 epoch(s)
+2019-05-04 12:23:23,912:INFO: Epoch 1/5
+2019-05-04 12:23:39,377:INFO: - Train metrics: accuracy: 0.409 ; loss: 1.531
+2019-05-04 12:23:41,430:INFO: - Eval metrics : accuracy: 0.123 ; loss: 4.154
+2019-05-04 12:23:41,695:INFO: - Found new best accuracy
+2019-05-04 12:23:41,695:INFO: Epoch 2/5
+2019-05-04 12:23:55,943:INFO: - Train metrics: accuracy: 0.499 ; loss: 1.198
+2019-05-04 12:23:58,017:INFO: - Eval metrics : accuracy: 0.204 ; loss: 4.734
+2019-05-04 12:23:58,309:INFO: - Found new best accuracy
+2019-05-04 12:23:58,309:INFO: Epoch 3/5
+2019-05-04 12:24:12,509:INFO: - Train metrics: accuracy: 0.540 ; loss: 1.114
+2019-05-04 12:24:14,600:INFO: - Eval metrics : accuracy: 0.265 ; loss: 5.184
+2019-05-04 12:24:14,901:INFO: - Found new best accuracy
+2019-05-04 12:24:14,902:INFO: Epoch 4/5
+2019-05-04 12:24:29,083:INFO: - Train metrics: accuracy: 0.568 ; loss: 1.046
+2019-05-04 12:24:31,213:INFO: - Eval metrics : accuracy: 0.267 ; loss: 5.220
+2019-05-04 12:24:31,468:INFO: - Found new best accuracy
+2019-05-04 12:24:31,468:INFO: Epoch 5/5
+2019-05-04 12:24:45,717:INFO: - Train metrics: accuracy: 0.590 ; loss: 0.989
+2019-05-04 12:24:47,809:INFO: - Eval metrics : accuracy: 0.276 ; loss: 5.339
+2019-05-04 12:24:48,142:INFO: - Found new best accuracy
+2019-05-04 12:37:08,139:INFO: Loading the datasets...
+2019-05-04 12:37:08,170:INFO: - done.
+2019-05-04 12:37:08,173:INFO: Source code loaded from - /home/denys/DataScienc/projects/owoschi/experiments/mobilenet_v2_se/arch_se_after_pw/model.py.
+2019-05-04 12:37:09,880:INFO: Architecture used - se_after_pw.
+2019-05-04 12:37:09,881:INFO: Early stopping enabled.
+2019-05-04 12:37:09,889:INFO: Starting training for 5 epoch(s)
+2019-05-04 12:37:10,096:INFO: Epoch 1/5
+2019-05-04 12:37:53,085:INFO: - Train metrics: accuracy: 0.188 ; loss: 2.125
+2019-05-04 12:37:55,211:INFO: - Eval metrics : accuracy: 0.263 ; loss: 2.447
+2019-05-04 12:37:55,518:INFO: - Found new best accuracy
+2019-05-04 12:37:55,519:INFO: Epoch 2/5
+2019-05-04 12:38:36,766:INFO: - Train metrics: accuracy: 0.279 ; loss: 1.954
+2019-05-04 12:38:38,853:INFO: - Eval metrics : accuracy: 0.388 ; loss: 1.764
+2019-05-04 12:38:39,126:INFO: - Found new best accuracy
+2019-05-04 12:38:39,126:INFO: Epoch 3/5
+2019-05-04 12:39:20,083:INFO: - Train metrics: accuracy: 0.326 ; loss: 1.836
+2019-05-04 12:39:22,197:INFO: - Eval metrics : accuracy: 0.424 ; loss: 1.665
+2019-05-04 12:39:22,488:INFO: - Found new best accuracy
+2019-05-04 12:39:22,489:INFO: Epoch 4/5
+2019-05-04 12:40:03,424:INFO: - Train metrics: accuracy: 0.378 ; loss: 1.728
+2019-05-04 12:40:05,503:INFO: - Eval metrics : accuracy: 0.454 ; loss: 1.494
+2019-05-04 12:40:05,762:INFO: - Found new best accuracy
+2019-05-04 12:40:05,762:INFO: Epoch 5/5
+2019-05-04 12:40:46,719:INFO: - Train metrics: accuracy: 0.396 ; loss: 1.669
+2019-05-04 12:40:48,833:INFO: - Eval metrics : accuracy: 0.479 ; loss: 1.448
+2019-05-04 12:40:49,143:INFO: - Found new best accuracy

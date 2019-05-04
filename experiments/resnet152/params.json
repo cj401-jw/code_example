@@ -1,1 +1,0 @@
-{"arch": "resnet152", "pretrain": 1, "n_clas": 9, "im_sz": 224, "batch_size": 32, "bs_test": 16, "learning_rate": 2e-3, "wd": 1e-4, "num_epochs": 5, "num_workers": 4, "cuda": 1, "scheduler": "one_cycle", "div_factor": 25, "pct_start": 0.3, "save_summary_steps": 1,  "early_stopping": {"patience": 5, "monitor_metric": 0, "min_delta": 0.1, "minimize": 1}}
