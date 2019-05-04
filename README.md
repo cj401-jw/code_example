@@ -210,6 +210,7 @@ __TODO__:
 - clean up code in scripts                       
 - update Early Stopping                          <- DONE
 - compare performance with fast.ai library
+- add BOTorch for hyper params search
 - integrate TensorBoard
 - add monitoring of activations/gradients
 - add monitoring of weights/updates magnitude (histogram of all layers)
