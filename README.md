@@ -139,7 +139,7 @@ The structure of completed params searching might look like this:
 ```
 So as you can see it automaticaly creates folder for each value of search variable (parameter). The scrtucture 
 of these folders are the same as after running `train.py`.
-If you need to try for example different building block for the same architecture than define several functions which will init models with different blocks in `*.py` file and set there names in `params.json`. Here is and example:
+If you need to try for example different building block for the same architecture than define several functions which will init models with different blocks in `*.py` file and set there names in `params.json`. Here is and example:</br>
 __model.py__:
 ```
 class SEpwBottleneckResidual():
@@ -175,7 +175,7 @@ __params.json__:
     }
 }
 ```
-
+For hyper search will be used only `*.py` file from parent_dir.
 
 __Important notes__: 
 1. You can run for example several different architectures not just params. 
