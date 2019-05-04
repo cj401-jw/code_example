@@ -91,7 +91,7 @@ Create a folder with experiment name under `experiments` folder with `params.jso
 ```
 python train.py --data_dir data/imagenet/ --model_dir experiments/resnet18/
 ```
-It will instantiate a model and train it on the training set following the hyperparameters specified in `params.json`. It will also evaluate metrics (defined in `model/metirc.py`) on the validation set. While training you can monitor training through real time ploting which automaticly will arise after start training. </br> 
+Script will check `"arch"` variable in `params.json`  then will search function with same name in `*.py` file. This function should initilize a model. In that way we said to script that we want to run this architecture. Script will instantiate a model and train it on the training set following the hyperparameters specified in `params.json`. It will also evaluate metrics (defined in `model/metirc.py`) on the validation set. While training you can monitor training through real time ploting which automaticly will arise after start training. </br> 
 The structure of completed experiment might look like this (try to give meaningful names to the directories depending on what experiment you are running):
 ```
 ├── experiments             
