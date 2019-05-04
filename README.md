@@ -139,6 +139,30 @@ The structure of completed params searching might look like this:
 ```
 So as you can see it automaticaly creates folder for each value of search variable (parameter). The scrtucture 
 of these folders are the same as after running `train.py`.
+If you need to try for example different building block for the same architecture than define several functions which will init models with different blocks in `*.py` file and set there names in `params.json`. Here is and example:
+```
+__model.py__
+
+class SEpwBottleneckResidual():
+  ...
+class SEdwBottleneckResidual():
+  ...
+class MobileNetV2(block=BuildingBlock):
+  ...
+
+def se_after_pw(num_classes=9):
+    return MobileNetV2(block=SEpwBottleneckResidual, n_class=num_classes, input_size=224, width_mult=1.)
+      
+def se_after_dw(num_classes=9):
+    return MobileNetV2(block=SEdwBottleneckResidual, n_class=num_classes, input_size=224, width_mult=1.)
+         
+def se_after_pwlinear(num_classes=9):
+    return MobileNetV2(block=SEpwlinearBottleneckResidual, n_class=num_classes, input_size=224, width_mult=1.)
+
+def mobilenet_v2(num_classes=9):
+    return mobilenetv2.MobileNetV2(n_class=num_classes, input_size=224, width_mult=1.)
+```
+
 
 __Important notes__: 
 1. You can run for example several different architectures not just params. 
