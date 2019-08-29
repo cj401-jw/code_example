@@ -1,4 +1,13 @@
 # Structure of the code
+#### TODO
+- Refactor all this code as python library to save a place. Code should takes so many folders
+- Add possibility to run in notebook (Catalyst analog)
+- add BOTorch for hyper params search
+- integrate TensorBoard
+- add monitoring of activations/gradients
+- add monitoring of weights/updates magnitude (histogram of all layers)
+
+
 This is a template of project code leveraged from [Stanford cs230 Deep Learning](https://cs230-stanford.github.io/project-code-examples.html) course and updated for my specific purposes.
 
 ```
@@ -202,15 +211,3 @@ If you want to see results in __graphical__ way please run.
 python plot_results.py --parent_dir experiments/learning_rate
 ```
 This script also runs automaticaly within searching hyperparams.
-
-
-
-__TODO__:
-- describe how to use this code                  <- DONE
-- clean up code in scripts                       
-- update Early Stopping                          <- DONE
-- compare performance with fast.ai library
-- add BOTorch for hyper params search
-- integrate TensorBoard
-- add monitoring of activations/gradients
-- add monitoring of weights/updates magnitude (histogram of all layers)
